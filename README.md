@@ -16,7 +16,7 @@ The output ISO is based on Ubuntu architecture. It uses Ubuntu 20.04 as standard
 ## Build
 - Clone this repository at /home/youruser
  ```
-git https://github.com/ParaguayEduca/os-builder.git
+git clone https://github.com/ParaguayEduca/os-builder.git
 ```
 - Change to cloned directory
 ```
