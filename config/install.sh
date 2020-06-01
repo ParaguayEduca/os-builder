@@ -6,10 +6,17 @@ echo "deb [trusted=yes arch=amd64]" \
 
 sudo add-apt-repository -y ppa:pyeduca/pyeducadependencies
 
+sudo add-apt-repository -y ppa:jclic/master
+echo "deb https://dl.bintray.com/scratux/stable focal main" | sudo tee -a /etc/apt/sources.list
+
 apt-get update
 
 #Install pyedu dependencies
 apt install -y pyedu-dependencies
+
+#Install Pip2
+curl https://bootstrap.pypa.io/get-pip.py --output get-pip.py
+python2 get-pip.py
 
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
