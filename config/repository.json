@@ -65,9 +65,9 @@
         },
         {
             "name": "get-books-activity",
-            "link": "https://github.com/sugarlabs/get-books-activity.git",
-            "version": "v19",
-            "last_commit": ""
+            "link": "https://github.com/ParaguayEduca/get-books-activity.git",
+            "version": "",
+            "last_commit": "85528439f2358b3b1b2e63bfd07c79b039ae5a59"
         },
         {
             "name": "activity-turtle-confusion",
@@ -82,9 +82,9 @@
         },
         {
             "name": "JClic",
-            "link": "https://github.com/sugarlabs/JClic.git",
-            "version": "v1",
-            "last_commit": ""
+            "link": "https://github.com/ParaguayEduca/JClic.git",
+            "version": "",
+            "last_commit": "95060590dabb9f9877a2c2338fae96c206439200"
         },
         {
             "name": "Java",
@@ -115,6 +115,12 @@
             "link": "https://github.com/ParaguayEduca/scratch-activity.git",
             "version": "",
             "last_commit": "7f366c8d133b9bbed91fa608caf81d65bc1f8db4"
+        },
+        {
+            "name": "VNCServer.activity",
+            "link": "https://github.com/ParaguayEduca/VNCServer.activity.git",
+            "version": "",
+            "last_commit": "a57475a5e343c6e62ecb03bec747d098390964fa"
         }
     ]
 }
