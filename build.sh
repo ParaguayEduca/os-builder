@@ -1,16 +1,14 @@
 #!/bin/sh root
 
-currentuser="$(whoami)"
-
 # Install pre-requisities
 sudo apt install squashfs-tools genisoimage hashalot jq
 
 #Obtain the base system
 # 1 Download Ubuntu 20.04 desktop image in config to validate it
-wget --no-parent --user-agent "user" -P /home/$currentuser/os-builder/ http://paraguayeduca.org/descarga/ubuntu-20.04-desktop-amd64.iso
+wget --no-parent --user-agent "user" -P $HOME/os-builder/ http://paraguayeduca.org/descarga/ubuntu-20.04-desktop-amd64.iso
 
 #Verify that the image has been downloaded correctly
-sudo sh /home/$currentuser/os-builder/config/validateIso.sh
+sudo sh $HOME/os-builder/helpers/validateIso.sh
 
 #Capture return code from validateIso.sh
 if [ $? -eq 0 ]; then
@@ -20,19 +18,19 @@ else
 fi
 
 #Move the downloaded image to the home
-sudo mv /home/$currentuser/os-builder/ubuntu-20.04-desktop-amd64.iso ~
+sudo mv $HOME/os-builder/ubuntu-20.04-desktop-amd64.iso ~
 
 # 2 Move or copy it into an empty directory
 cd ~
 mkdir ~/livecdtmp
 mv ubuntu-20.04-desktop-amd64.iso ~/livecdtmp
 
-mkdir /home/$currentuser/os-builder/config/Activities
-sudo cp /home/$currentuser/os-builder/config/repository.json /home/$currentuser/os-builder/config/Activities
-cd /home/$currentuser/os-builder/config/Activities
-bash /home/$currentuser/os-builder/config/activitiesGit.sh
-sudo cp -r /home/$currentuser/os-builder/config ~/livecdtmp
-sudo rm -r /home/$currentuser/os-builder/config/Activities/
+mkdir $HOME/os-builder/config/Activities
+sudo cp $HOME/os-builder/config/repository.json $HOME/os-builder/config/Activities
+cd $HOME/os-builder/config/Activities
+bash $HOME/os-builder/helpers/activitiesGit.sh
+sudo cp -r $HOME/os-builder/config ~/livecdtmp
+sudo rm -r $HOME/os-builder/config/Activities/
 cd ~
 
 #Extract the CD .iso contents
@@ -51,15 +49,15 @@ sudo mv squashfs-root edit
 
 #Prepare and chroot
 #If you need network connectivity within chroot
-sudo cp /home/$currentuser/os-builder/config/resolv.conf ~/livecdtmp/edit/etc/
-sudo cp /home/$currentuser/os-builder/config/sources.list ~/livecdtmp/edit/etc/apt/
+sudo cp $HOME/os-builder/config/resolv.conf ~/livecdtmp/edit/etc/
+sudo cp $HOME/os-builder/config/sources.list ~/livecdtmp/edit/etc/apt/
 
 #pull your host's resolvconf info into the chroot
 cd ~/livecdtmp
 sudo mount -o bind /run/ edit/run
 
 #copy the hosts file
-sudo cp /home/$currentuser/os-builder/config/hosts ~/livecdtmp/edit/etc/
+sudo cp $HOME/os-builder/config/hosts ~/livecdtmp/edit/etc/
 
 #Mount important directories of your host system to the edit directory
 cd ~/livecdtmp
@@ -117,7 +115,7 @@ sudo rm md5sum.txt
 find -type f -print0 | sudo xargs -0 md5sum | grep -v isolinux/boot.cat | sudo tee md5sum.txt
 
 #Create the ISO image
-sudo mkisofs -D -r -V "$IMAGE_NAME" -cache-inodes -J -l -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o /home/$currentuser/ubuntu-20.04-sugar.iso .
+sudo mkisofs -D -r -V "$IMAGE_NAME" -cache-inodes -J -l -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o $HOME/ubuntu-20.04-sugar.iso .
 
 #Clean home directory after created the iso
-sh /home/$currentuser/os-builder/config/cleanHome.sh
+sh $HOME/os-builder/helpers/cleanHome.sh
