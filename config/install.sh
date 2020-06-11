@@ -13,8 +13,9 @@ sudo add-apt-repository -y ppa:jclic/master
 apt-get update
 
 #Donwload and install Scratch
-wget --no-parent --user-agent "user" -P /home/$currentuser/os-builder/ http://paraguayeduca.org/descarga/Scratch_3.0.deb
-dpkg -i /home/$currentuser/os-builder/Scratch_3.0.deb
+wget --no-parent --user-agent "user" -P $HOME/os-builder/ http://paraguayeduca.org/descarga/Scratch_3.0.deb
+dpkg -i $HOME/os-builder/Scratch_3.0.deb
+rm $HOME/os-builder/Scratch_3.0.deb
 
 #Install pyedu dependencies
 apt install -y pyedu-dependencies
