@@ -20,8 +20,8 @@ dpkg -i /home/$currentuser/os-builder/Scratch_3.0.deb
 apt install -y pyedu-dependencies
 
 #Install Pip2
-curl https://bootstrap.pypa.io/get-pip.py --output get-pip.py
-python2 get-pip.py
+# curl https://bootstrap.pypa.io/get-pip.py --output get-pip.py
+# python2 get-pip.py
 
 flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
 
