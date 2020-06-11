@@ -1,0 +1,139 @@
+{
+    "sync": {
+        "flatpak": {
+            "settings": {
+                "remove_unmanaged_repos": false,
+                "remove_unmanaged_apps": false
+            },
+            "repos": [
+                {
+                    "name": "flathub",
+                    "repo": "https://flathub.org/repo/flathub.flatpakrepo",
+                    "type": ""
+                }
+            ],
+            "apps": [
+                {
+                    "name": "org.sugarlabs.AbacusActivity",
+                    "repo": "flathub",
+                    "version": "latest",
+                    "pin": false
+                },
+                {
+                    "name": "org.sugarlabs.Chart",
+                    "repo": "flathub",
+                    "version": "latest",
+                    "pin": false
+                },
+                {
+                    "name": "org.sugarlabs.ColorDeducto",
+                    "repo": "flathub",
+                    "version": "latest",
+                    "pin": false
+                },
+                {
+                    "name": "org.sugarlabs.Dimensions",
+                    "repo": "flathub",
+                    "version": "latest",
+                    "pin": false
+                },
+                {
+                    "name": "org.sugarlabs.Finance",
+                    "repo": "flathub",
+                    "version": "latest",
+                    "pin": false
+                },
+                {
+                    "name": "org.sugarlabs.FotoToon",
+                    "repo": "flathub",
+                    "version": "latest",
+                    "pin": false
+                },
+                {
+                    "name": "org.sugarlabs.FractionBounce",
+                    "repo": "flathub",
+                    "version": "latest",
+                    "pin": false
+                },
+                {
+                    "name": "org.sugarlabs.ImplodeActivity",
+                    "repo": "flathub",
+                    "version": "latest",
+                    "pin": false
+                },
+                {
+                    "name": "org.sugarlabs.Maze",
+                    "repo": "flathub",
+                    "version": "latest",
+                    "pin": false
+                },
+                {
+                    "name": "org.sugarlabs.Measure",
+                    "repo": "flathub",
+                    "version": "latest",
+                    "pin": false
+                },
+                {
+                    "name": "org.sugarlabs.Memorize",
+                    "repo": "flathub",
+                    "version": "latest",
+                    "pin": false
+                },
+                {
+                    "name": "org.sugarlabs.MusicKeyboard",
+                    "repo": "flathub",
+                    "version": "latest",
+                    "pin": false
+                },
+                {
+                    "name": "org.sugarlabs.Physics",
+                    "repo": "flathub",
+                    "version": "latest",
+                    "pin": false
+                },
+                {
+                    "name": "org.sugarlabs.Pippy",
+                    "repo": "flathub",
+                    "version": "latest",
+                    "pin": false
+                },
+                {
+                    "name": "org.sugarlabs.ReadETexts",
+                    "repo": "flathub",
+                    "version": "latest",
+                    "pin": false
+                },
+                {
+                    "name": "org.sugarlabs.Sliderule",
+                    "repo": "flathub",
+                    "version": "latest",
+                    "pin": false
+                },
+                {
+                    "name": "org.sugarlabs.Speak",
+                    "repo": "flathub",
+                    "version": "latest",
+                    "pin": false
+                },
+                {
+                    "name": "org.sugarlabs.StoryActivity",
+                    "repo": "flathub",
+                    "version": "latest",
+                    "pin": false
+                },
+                {
+                    "name": "org.sugarlabs.TurtlePondActivity",
+                    "repo": "flathub",
+                    "version": "latest",
+                    "pin": false
+                },
+                {
+                    "name": "org.sugarlabs.Words",
+                    "repo": "flathub",
+                    "version": "latest",
+                    "pin": false
+                }
+            ]
+        }
+    }
+}

@@ -74,6 +74,10 @@ sudo chroot edit ln -s /bin/true /sbin/initctl
 
 #install software
 sudo cp ~/livecdtmp/config/install.sh ~/livecdtmp/edit/
+sudo cp ~/livecdtmp/config/flatpak.json ~/livecdtmp/edit/
+sudo chroot edit mkdir /root/.config
+sudo chroot edit mkdir /root/.config/flatpak-sync
+sudo chroot edit mv flatpak.json /root/.config/flatpak-sync
 sudo chroot edit sudo sh install.sh
 sudo chroot edit rm -fvR install.sh
 sudo cp -r ~/livecdtmp/config/Activities/* ~/livecdtmp/edit/usr/share/sugar/activities/
