@@ -7,8 +7,8 @@
         }, {
             "name": "help-activity",
             "link": "https://github.com/sugarlabs/help-activity.git",
-            "version": "v20",
-            "last_commit": ""
+            "version": "",
+            "last_commit": "7718ef76b82677537297e358d3a05ea2ceb7e854"
         },
         {
             "name": "lettermatch",
