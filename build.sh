@@ -78,6 +78,9 @@ sudo chroot edit mkdir /root/.config/flatpak-sync
 sudo chroot edit mv flatpak.json /root/.config/flatpak-sync
 sudo chroot edit sudo sh install.sh
 sudo chroot edit rm -fvR install.sh
+sudo chroot edit mkdir -p /etc/skel/Desktop
+sudo chroot edit chmod +x /usr/share/applications/firefox.desktop
+sudo chroot edit ln -s /usr/share/applications/firefox.desktop /etc/skel/Desktop/firefox.desktop
 sudo cp -r ~/livecdtmp/config/Activities/* ~/livecdtmp/edit/usr/share/sugar/activities/
 
 #Be sure to remove any temporary files which are no longer needed

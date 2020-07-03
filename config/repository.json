@@ -54,9 +54,9 @@
         },
         {
             "name": "labyrinth-activity",
-            "link": "https://github.com/sugarlabs/labyrinth-activity.git",
+            "link": "https://github.com/ParaguayEduca/labyrinth-activity.git",
             "version": "",
-            "last_commit": "d8ce4dd4b2b1c57c14cff8583bcd6dc6d58d8133"
+            "last_commit": "1841cfa56a951809e5088cba433f48766198fdd9"
         }, {
             "name": "jigsaw-puzzle-branch",
             "link": "https://github.com/sugarlabs/jigsaw-puzzle-branch.git",
@@ -71,9 +71,9 @@
         },
         {
             "name": "activity-turtle-confusion",
-            "link": "https://github.com/sugarlabs/activity-turtle-confusion.git",
+            "link": "https://github.com/ParaguayEduca/activity-turtle-confusion.git",
             "version": "",
-            "last_commit": "e432edc29feb7721f571e2078798be1c7dff83f6"
+            "last_commit": "fa5b9d000c71e9d010017455ecd2bb01045af8f8"
         }, {
             "name": "turtleart-activity",
             "link": "https://github.com/sugarlabs/turtleart-activity.git",
@@ -121,6 +121,18 @@
             "link": "https://github.com/ParaguayEduca/VNCServer.activity.git",
             "version": "",
             "last_commit": "a57475a5e343c6e62ecb03bec747d098390964fa"
+        },
+        {
+            "name": "4526-activity",
+            "link": "https://github.com/ParaguayEduca/4526-activity.git",
+            "version": "",
+            "last_commit": "4fe12b0f6dbe25ade15fb773a1d6357a38f889b0"
+        },
+        {
+            "name": "TurtleBots.activity",
+            "link": "https://github.com/ParaguayEduca/TurtleBots.activity.git",
+            "version": "",
+            "last_commit": "c8d526ec6a04246f9e9c50e177fff4e9431f4835"
         }
     ]
 }
