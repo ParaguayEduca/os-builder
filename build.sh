@@ -73,10 +73,14 @@ sudo chroot edit ln -s /bin/true /sbin/initctl
 #install software
 sudo cp ~/livecdtmp/config/install.sh ~/livecdtmp/edit/
 sudo cp ~/livecdtmp/config/flatpak.json ~/livecdtmp/edit/
+sudo cp ~/livecdtmp/config/login ~/livecdtmp/edit/
+sudo cp ~/livecdtmp/config/login.png ~/livecdtmp/edit/
 sudo chroot edit mkdir /root/.config
 sudo chroot edit mkdir /root/.config/flatpak-sync
 sudo chroot edit mv flatpak.json /root/.config/flatpak-sync
 sudo chroot edit sudo sh install.sh
+sudo chroot edit chmod +x login
+sudo chroot edit ./login login.png
 sudo chroot edit rm -fvR install.sh
 sudo chroot edit mkdir -p /etc/skel/Desktop
 sudo chroot edit chmod +x /usr/share/applications/firefox.desktop
