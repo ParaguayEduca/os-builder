@@ -1,9 +1,9 @@
 #!/bin/bash root
 
-declare -a appShorcuts=("firefox.desktop" "geogebra.desktop" "etoys.desktop" "jclic.desktop" "scratch-desktop.desktop")
+declare -a appShortcuts=("firefox.desktop" "geogebra.desktop" "etoys.desktop" "jclic.desktop" "scratch-desktop.desktop")
 
-shorcuts(){
-    for appName in "${appShorcuts[@]}"; do
+shortcuts(){
+    for appName in "${appShortcuts[@]}"; do
         sudo chroot edit chmod +x /usr/share/applications/"$appName"
         sudo chroot edit ln -s /usr/share/applications/"$appName" /etc/skel/Desktop/"$appName"
     done
@@ -92,8 +92,8 @@ sudo chroot edit chmod +x login
 sudo chroot edit ./login login.png
 sudo chroot edit rm -fvR install.sh
 sudo chroot edit mkdir -p /etc/skel/Desktop
-#Created shorcuts
-shorcuts
+#Created shortcuts
+shortcuts
 sudo cp -r ~/livecdtmp/config/Activities/* ~/livecdtmp/edit/usr/share/sugar/activities/
 
 #Be sure to remove any temporary files which are no longer needed
