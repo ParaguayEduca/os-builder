@@ -1,4 +1,13 @@
-#!/bin/sh root
+#!/bin/bash root
+
+declare -a appShorcuts=("firefox.desktop" "geogebra.desktop" "etoys.desktop" "jclic.desktop" "scratch-desktop.desktop")
+
+shorcuts(){
+    for appName in "${appShorcuts[@]}"; do
+        sudo chroot edit chmod +x /usr/share/applications/"$appName"
+        sudo chroot edit ln -s /usr/share/applications/"$appName" /etc/skel/Desktop/"$appName"
+    done
+}
 
 # Install pre-requisities
 sudo apt install squashfs-tools genisoimage hashalot jq
@@ -83,8 +92,8 @@ sudo chroot edit chmod +x login
 sudo chroot edit ./login login.png
 sudo chroot edit rm -fvR install.sh
 sudo chroot edit mkdir -p /etc/skel/Desktop
-sudo chroot edit chmod +x /usr/share/applications/firefox.desktop
-sudo chroot edit ln -s /usr/share/applications/firefox.desktop /etc/skel/Desktop/firefox.desktop
+#Created shorcuts
+shorcuts
 sudo cp -r ~/livecdtmp/config/Activities/* ~/livecdtmp/edit/usr/share/sugar/activities/
 
 #Be sure to remove any temporary files which are no longer needed
