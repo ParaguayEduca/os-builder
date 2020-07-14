@@ -1,5 +1,4 @@
 #!/bin/sh
-currentuser="$(whoami)"
 
 apt update
 echo "deb [trusted=yes arch=amd64]" \

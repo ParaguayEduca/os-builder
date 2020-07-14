@@ -1,12 +1,45 @@
 #!/bin/bash root
 
-declare -a appShorcuts=("firefox.desktop" "geogebra.desktop" "etoys.desktop" "jclic.desktop" "scratch-desktop.desktop")
+declare -a appShortcuts=("firefox.desktop" "geogebra.desktop" "etoys.desktop" "jclic.desktop" "scratch-desktop.desktop")
 
-shorcuts(){
-    for appName in "${appShorcuts[@]}"; do
+shortcuts(){
+    sudo chroot edit mkdir -p /etc/skel/Desktop
+    for appName in "${appShortcuts[@]}"; do
         sudo chroot edit chmod +x /usr/share/applications/"$appName"
         sudo chroot edit ln -s /usr/share/applications/"$appName" /etc/skel/Desktop/"$appName"
     done
+}
+
+cleanHome(){
+    cd ~
+    sudo mv $HOME/livecdtmp/ubuntu-20.04-desktop-amd64.iso ~
+
+    sudo umount $HOME/livecdtmp/mnt
+    sudo umount $HOME/livecdtmp/edit/run
+
+    sudo rm -r livecdtmp
+}
+
+cleanChroot(){
+    sudo chroot edit apt clean
+    sudo chroot edit rm -rf /tmp/* ~/.bash_history
+    sudo chroot edit rm /etc/resolv.conf
+    sudo chroot edit rm /sbin/initctl
+    sudo chroot edit dpkg-divert --rename --remove /sbin/initctl
+}
+
+mountChroot(){
+    sudo mount --bind /dev/ edit/dev
+    sudo chroot edit mount -t proc none /proc
+    sudo chroot edit mount -t sysfs none /sys
+    sudo chroot edit mount -t devpts none /dev/pts
+}
+
+umountChroot(){
+    sudo chroot edit umount /proc || umount -lf /proc
+    sudo chroot edit umount /sys
+    sudo chroot edit umount /dev/pts
+    sudo chroot edit umount /dev
 }
 
 # Install pre-requisities
@@ -52,7 +85,7 @@ sudo mount -o loop ubuntu-20.04-desktop-amd64.iso mnt
 mkdir extract-cd
 sudo rsync --exclude=/casper/filesystem.squashfs -a mnt/ extract-cd
 
-# Extract the Desktop system
+#Extract the Desktop system
 sudo unsquashfs mnt/casper/filesystem.squashfs
 sudo mv squashfs-root edit
 
@@ -61,53 +94,38 @@ sudo mv squashfs-root edit
 sudo cp $HOME/os-builder/config/resolv.conf ~/livecdtmp/edit/etc/
 sudo cp $HOME/os-builder/config/sources.list ~/livecdtmp/edit/etc/apt/
 
-#pull your host's resolvconf info into the chroot
+#Pull your host's resolvconf info into the chroot
 cd ~/livecdtmp
 sudo mount -o bind /run/ edit/run
 
-#copy the hosts file
+#Copy the hosts file
 sudo cp $HOME/os-builder/config/hosts ~/livecdtmp/edit/etc/
 
 #Mount important directories of your host system to the edit directory
 cd ~/livecdtmp
-sudo mount --bind /dev/ edit/dev
-sudo chroot edit mount -t proc none /proc
-sudo chroot edit mount -t sysfs none /sys
-sudo chroot edit mount -t devpts none /dev/pts
+mountChroot
 
-#before installing or upgrading packages you need to run
+#Before installing or upgrading packages you need to run
 sudo chroot edit dpkg-divert --local --rename --add /sbin/initctl
 sudo chroot edit ln -s /bin/true /sbin/initctl
 
-#install software
-sudo cp ~/livecdtmp/config/install.sh ~/livecdtmp/edit/
-sudo cp ~/livecdtmp/config/flatpak.json ~/livecdtmp/edit/
-sudo cp ~/livecdtmp/config/login ~/livecdtmp/edit/
-sudo cp ~/livecdtmp/config/login.png ~/livecdtmp/edit/
+#Install software
+sudo cp config/install.sh config/flatpak.json config/login config/login.png ~/livecdtmp/edit/
 sudo chroot edit mkdir /root/.config
 sudo chroot edit mkdir /root/.config/flatpak-sync
 sudo chroot edit mv flatpak.json /root/.config/flatpak-sync
 sudo chroot edit sudo sh install.sh
 sudo chroot edit chmod +x login
 sudo chroot edit ./login login.png
-sudo chroot edit rm -fvR install.sh
-sudo chroot edit mkdir -p /etc/skel/Desktop
-#Created shorcuts
-shorcuts
+#Created shortcuts
+shortcuts
 sudo cp -r ~/livecdtmp/config/Activities/* ~/livecdtmp/edit/usr/share/sugar/activities/
 
 #Be sure to remove any temporary files which are no longer needed
-sudo chroot edit apt clean
-sudo chroot edit rm -rf /tmp/* ~/.bash_history
-sudo chroot edit rm /etc/resolv.conf
-sudo chroot edit rm /sbin/initctl
-sudo chroot edit dpkg-divert --rename --remove /sbin/initctl
+cleanChroot
 
 #Now unmount all special filesystems and exit the chroot
-sudo chroot edit umount /proc || umount -lf /proc
-sudo chroot edit umount /sys
-sudo chroot edit umount /dev/pts
-sudo chroot edit umount /dev
+umountChroot
 
 #Producing the CD image
 #Assembling the file system
@@ -134,4 +152,4 @@ find -type f -print0 | sudo xargs -0 md5sum | grep -v isolinux/boot.cat | sudo t
 sudo mkisofs -D -r -V "$IMAGE_NAME" -cache-inodes -J -l -b isolinux/isolinux.bin -c isolinux/boot.cat -no-emul-boot -boot-load-size 4 -boot-info-table -o $HOME/ubuntu-20.04-sugar.iso .
 
 #Clean home directory after created the iso
-sh $HOME/os-builder/helpers/cleanHome.sh
+cleanHome
