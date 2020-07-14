@@ -7,7 +7,7 @@ The output ISO is based on Ubuntu architecture. It uses Ubuntu 20.04 as standard
 
 ## System Requirements
 - At least 15 GB of free space
-- At least 2 GB RAM
+- At least 4 GB RAM
 - An Ubuntu kernel with squashfs support.
 - squashfs-tools, to unpack and recompile the 'live' filesystem (This package is included to in build.sh file)
 - genisoimage, to compile a new ISO image (This package is included to in build.sh file)
@@ -28,11 +28,7 @@ $ bash build.sh
 ```
 
 ## Packages
-- Vim
-- Sucrose
-- Gcompris-qt
-- Flatpak
-- Gnome-software-plugin-flatpak
+- All packages https://github.com/ParaguayEduca/pyedu-dependencies
 ## Sugar Activities
 | N  | Activity            |
 | -- | ------------------- |
