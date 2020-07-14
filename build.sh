@@ -114,7 +114,7 @@ sudo cp config/install.sh config/flatpak.json config/login config/login.png ~/li
 sudo chroot edit mkdir /root/.config
 sudo chroot edit mkdir /root/.config/flatpak-sync
 sudo chroot edit mv flatpak.json /root/.config/flatpak-sync
-sudo chroot edit sudo sh install.sh
+sudo chroot edit sudo bash install.sh
 sudo chroot edit chmod +x login
 sudo chroot edit ./login login.png
 #Created shortcuts
