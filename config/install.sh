@@ -1,6 +1,23 @@
 #!/bin/bash
 
 apt update
+
+declare -a appShortcuts=("firefox.desktop" "geogebra.desktop" "etoys.desktop" "jclic.desktop" "scratch-desktop.desktop")
+shortcuts(){
+    mkdir -p /etc/skel/Desktop
+    echo -e "#!/bin/bash \n" \
+    "for i in inkscape cura blender breecad freecad arduino arduino-cre; do" \
+    "apt install -y $i;" \
+    "done" \
+    >/etc/skel/Desktop/fatlab
+    chmod +x /etc/skel/Desktop/fatlab
+
+    for appName in "${appShortcuts[@]}"; do
+        chmod +x /usr/share/applications/"$appName"
+        ln -s /usr/share/applications/"$appName" /etc/skel/Desktop/"$appName"
+    done
+}
+
 addingRepository(){
     echo "deb [trusted=yes arch=amd64]" \
     "http://dev.laptop.org/~quozl/.us focal main" \

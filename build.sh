@@ -1,15 +1,5 @@
 #!/bin/bash root
 
-declare -a appShortcuts=("firefox.desktop" "geogebra.desktop" "etoys.desktop" "jclic.desktop" "scratch-desktop.desktop")
-
-shortcuts(){
-    sudo chroot edit mkdir -p /etc/skel/Desktop
-    for appName in "${appShortcuts[@]}"; do
-        sudo chroot edit chmod +x /usr/share/applications/"$appName"
-        sudo chroot edit ln -s /usr/share/applications/"$appName" /etc/skel/Desktop/"$appName"
-    done
-}
-
 cleanHome(){
     cd ~
     sudo mv $HOME/livecdtmp/ubuntu-20.04-desktop-amd64.iso ~
@@ -117,8 +107,6 @@ sudo chroot edit mv flatpak.json /root/.config/flatpak-sync
 sudo chroot edit sudo bash install.sh
 sudo chroot edit chmod +x login
 sudo chroot edit ./login login.png
-#Created shortcuts
-shortcuts
 sudo cp -r ~/livecdtmp/config/Activities/* ~/livecdtmp/edit/usr/share/sugar/activities/
 
 #Be sure to remove any temporary files which are no longer needed
