@@ -33,8 +33,20 @@ downloadDeb(){
     wget -P $HOME/os-builder/ http://s4a.cat/downloads/S4A16.deb
 }
 
+flatpakInstall(){
+    mkdir /root/.config
+    mkdir /root/.config/flatpak-sync
+    mv flatpak.json /root/.config/flatpak-sync
+
+    flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+    pip3 install flatpak-sync
+    flatpak-sync run -v
+}
+
+shortcuts
 addingRepository
 apt-get update
+flatpakInstall
 
 #Install Scratch
 downloadDeb
@@ -45,9 +57,3 @@ rm $HOME/os-builder/S4A16.deb
 
 #Install pyedu dependencies
 apt install -y pyedu-dependencies
-
-flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-
-pip3 install flatpak-sync
-
-flatpak-sync run -v

@@ -101,9 +101,6 @@ sudo chroot edit ln -s /bin/true /sbin/initctl
 
 #Install software
 sudo cp config/install.sh config/flatpak.json config/login config/login.png ~/livecdtmp/edit/
-sudo chroot edit mkdir /root/.config
-sudo chroot edit mkdir /root/.config/flatpak-sync
-sudo chroot edit mv flatpak.json /root/.config/flatpak-sync
 sudo chroot edit sudo bash install.sh
 sudo chroot edit chmod +x login
 sudo chroot edit ./login login.png
