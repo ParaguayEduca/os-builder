@@ -9,8 +9,8 @@ shortcuts(){
     "for i in inkscape cura blender breecad freecad arduino arduino-cre; do" \
     "apt install -y $i;" \
     "done" \
-    >/etc/skel/Desktop/fatlab
-    chmod +x /etc/skel/Desktop/fatlab
+    >/etc/skel/Desktop/fablab
+    chmod +x /etc/skel/Desktop/fablab
 
     for appName in "${appShortcuts[@]}"; do
         chmod +x /usr/share/applications/"$appName"
