@@ -1,6 +1,23 @@
 #!/bin/bash
 
 apt update
+
+declare -a appShortcuts=("firefox.desktop" "geogebra.desktop" "etoys.desktop" "jclic.desktop" "scratch-desktop.desktop")
+shortcuts(){
+    mkdir -p /etc/skel/Desktop
+    echo -e "#!/bin/bash \n" \
+    "for i in inkscape cura blender breecad freecad arduino arduino-cre; do" \
+    "apt install -y $i;" \
+    "done" \
+    >/etc/skel/Desktop/fablab
+    chmod +x /etc/skel/Desktop/fablab
+
+    for appName in "${appShortcuts[@]}"; do
+        chmod +x /usr/share/applications/"$appName"
+        ln -s /usr/share/applications/"$appName" /etc/skel/Desktop/"$appName"
+    done
+}
+
 addingRepository(){
     echo "deb [trusted=yes arch=amd64]" \
     "http://dev.laptop.org/~quozl/.us focal main" \
@@ -16,8 +33,20 @@ downloadDeb(){
     wget -P $HOME/os-builder/ http://s4a.cat/downloads/S4A16.deb
 }
 
+flatpakInstall(){
+    mkdir /root/.config
+    mkdir /root/.config/flatpak-sync
+    mv flatpak.json /root/.config/flatpak-sync
+
+    flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+    pip3 install flatpak-sync
+    flatpak-sync run -v
+}
+
+shortcuts
 addingRepository
 apt-get update
+flatpakInstall
 
 #Install Scratch
 downloadDeb
@@ -28,9 +57,3 @@ rm $HOME/os-builder/S4A16.deb
 
 #Install pyedu dependencies
 apt install -y pyedu-dependencies
-
-flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
-
-pip3 install flatpak-sync
-
-flatpak-sync run -v
